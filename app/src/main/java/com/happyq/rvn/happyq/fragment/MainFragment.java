@@ -65,27 +65,27 @@ public class MainFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                mSwipeRefreshLayout.setColorSchemeResources(R.color.marker_secondary, R.color.marker_primary, R.color.colorPrimary);
-                mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.marker_secondary, R.color.marker_primary, R.color.colorPrimary);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void onRefresh() {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                 //mAdapter.notifyDataSetChanged();
-                                new AsyncFetch().execute();
-                            }
-                        }, 2000);
+                    public void run() {
+                        //mAdapter.notifyDataSetChanged();
+                        new AsyncFetch().execute();
                     }
-                });
+                }, 2000);
+            }
+        });
 
-                recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        FragmentManager fm = getFragmentManager();
-                        fm.beginTransaction().replace(R.id.content_frame, new All_fragment()).commit();
-                    }
-                }));
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                FragmentManager fm = getFragmentManager();
+                fm.beginTransaction().replace(R.id.content_frame, new All_fragment()).commit();
+            }
+        }));
 
         new MainFragment.AsyncFetch().execute();
         return v;
@@ -111,7 +111,7 @@ public class MainFragment extends Fragment {
             try {
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
-                url = new URL("https://happyq.txtlinkapp.com/happyq_app/ops_query.php");
+                url = new URL("https://happyq.txtlinkapp.com/happyq_app/QA_query.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -138,11 +138,11 @@ public class MainFragment extends Fragment {
                 int response_code = conn.getResponseCode();
                 // Check if successful connection made
                 if (response_code == HttpURLConnection.HTTP_OK) {
-                        // Read data sent from server
-                        InputStream input = conn.getInputStream();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-                        StringBuilder result = new StringBuilder();
-                        String line;
+                    // Read data sent from server
+                    InputStream input = conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    StringBuilder result = new StringBuilder();
+                    String line;
 
                     while ((line = reader.readLine()) != null) {
                         result.append(line);
@@ -177,10 +177,12 @@ public class MainFragment extends Fragment {
                     notvisiblea();
                     JSONObject json_data = jArray.getJSONObject(i);
                     DataQueue QueueData = new DataQueue();
-                    //QueueData.rqueuename= json_data.getString("name");
+                    QueueData.rqueuename= json_data.getString("name");
                     QueueData.rqueuestime = json_data.getString("t_start");
                     QueueData.rqueueetime = json_data.getString("t_end");
                     QueueData.rqueueoperationday = json_data.getString("days");
+                    QueueData.Atitle = json_data.getString("header");
+                    QueueData.Announcement = json_data.getString("message");
 
                     //QueueData.fishImage= json_data.getString("fish_img");
                     //QueueData.price= json_data.getInt("price");

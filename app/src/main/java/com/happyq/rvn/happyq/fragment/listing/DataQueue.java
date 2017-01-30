@@ -18,6 +18,9 @@ public class DataQueue  {
     public String rqueueetime;
     public String rqueueoperationday;
 
+    //annpuncement
+    public String Announcement;
+    public String Atitle;
 
 
 

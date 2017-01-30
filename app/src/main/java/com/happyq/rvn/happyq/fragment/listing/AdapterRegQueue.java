@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.happyq.rvn.happyq.R;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public class AdapterRegQueue extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public class VHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public TextView tvrquename, tvrqueuestime, tvrqueueetime, tvrqueueoperationday;
+            public TextView tvrquename, tvrqueuestime, tvrqueueetime, tvrqueueoperationday, tvAnnouncement, tvAtitle;
 
 
 
@@ -29,6 +31,9 @@ public class AdapterRegQueue extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 tvrqueuestime = (TextView) v.findViewById(R.id.tv_qstime);
                 tvrqueueetime = (TextView) v.findViewById(R.id.tv_qetime);
                 tvrqueueoperationday = (TextView) v.findViewById(R.id.tv_qoperationday);
+
+                tvAnnouncement = (TextView) v.findViewById(R.id.tv_announcement);
+                tvAtitle = (TextView) v.findViewById(R.id.tv_Atitle);
             }
         }
 
@@ -52,6 +57,8 @@ public class AdapterRegQueue extends RecyclerView.Adapter<RecyclerView.ViewHolde
         myHolder.tvrqueuestime.setText(current.rqueuestime);
         myHolder.tvrqueueetime.setText(current.rqueueetime);
         myHolder.tvrqueueoperationday.setText(current.rqueueoperationday);
+        myHolder.tvAtitle.setText(current.Atitle);
+        myHolder.tvAnnouncement.setText(current.Announcement);
     }
 
     @Override

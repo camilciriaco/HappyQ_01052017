@@ -29,7 +29,7 @@ public class  MainQAdapter extends RecyclerView.Adapter<MainQAdapter.ViewHolder>
 
         public ViewHolder(View v) {
             super(v);
-            tvname = (TextView)v.findViewById(R.id.tv_name);
+            //tvname = (TextView)v.findViewById(R.id.tv_name);
             tvtitle = (TextView) v.findViewById(R.id.tv_title);
             tvnumber = (TextView) v.findViewById(R.id.tv_number);
             //tvYear = (TextView) v.findViewById(R.id.tv_year);

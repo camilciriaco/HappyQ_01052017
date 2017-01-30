@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Created by RVN on 1/30/2017.
  */
-
+//commmeenennt
 public class QueueNumber extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

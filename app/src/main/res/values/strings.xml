@@ -1,0 +1,224 @@
+<resources>
+    <string name="app_name">HappyQ</string>
+
+    <string name="welcom">Welcome</string>
+    <string name="city_address">Jawa Barat, Indonesia</string>
+
+    <string name="about_text">App display Interesting spot at City</string>
+
+    <!-- Sign-in status messages -->
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="signed_in">Signed in</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="signed_out">Signed out</string>
+    <string name="signed_in_err">"Error: please check logs."</string>
+    <string name="error_null_person">
+        Error: Plus.PeopleApi.getCurrentPerson returned null. Ensure that the Google+ API is
+        enabled for your project, you have a properly configured google-services.json file
+        and that your device has an internet connection.
+    </string>
+    <string name="loading">Loading…</string>
+    <string name="auth_code_fmt">Auth Code: %s</string>
+    <string name="id_token_fmt">ID Token: %s</string>
+
+    <!-- ==================== GOOGLE API KEY STRING ============================================= -->
+    <!--Replace with your own interstitial ad unit id. -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3239677920600357/3800624160</string>
+    <!-- This is an ad unit ID for a test ad. Replace with your own banner ad unit id. -->
+    <string name="banner_ad_unit_id">ca-app-pub-3239677920600357/2323890961</string>
+    <!-- API KEY FOR MAP -->
+    <string name="api_key">AIzaSyBgUZmaIzukMCvoP5fWIK4EFqkBfq3hLgo</string>
+
+    <!-- ==================== OTHERS STRING ==================================================== -->
+    <string name="action_settings">Settings</string>
+    <string name="search_toolbar_hint">What service would you need today?</string>
+    <string name="dialog_confirm_title">Confirmation</string>
+    <string name="dialog_about_title">About</string>
+    <string name="activity_title_settings">Settings</string>
+    <string name="activity_title_maps">@string/title_nav_all</string>
+    <string name="no_phone_number">do not have a phone</string>
+    <string name="no_website">do not have a website</string>
+    <string name="add_favorite">added to favorites</string>
+    <string name="remove_favorite">remove from favorites</string>
+    <string name="fail_dial_number">Cannot dial phone number</string>
+    <string name="fail_open_website">Cannot open website</string>
+    <string name="no_internet">"No internet connection"</string>
+    <string name="tap_to_reloading">"Tap to try reloading"</string>
+
+    <string name="dialog_title_permission">Permission confirmation</string>
+    <string name="dialog_content_permission">
+        To activate all feature from this app you need to granted all required permission.
+        \nGo to app permission setting ?
+    </string>
+    <string name="dialog_content_gps">
+        GPS is disabled in your device. Would you like to enable it?
+    </string>
+
+
+    <!-- ==================== Strings related to Splash Screen ================================= -->
+    <string name="splash_welcome_text">WELCOME</string>
+    <string name="splash_desc_text">Application Your Service.</string>
+
+    <!-- ==================== Settings for Setting ============================================= -->
+    <string name="pref_category_notif">Notifications Setting</string>
+    <string name="pref_category_other">Others Setting</string>
+
+    <string name="pref_title_notif">Push Notifications</string>
+    <string name="pref_title_loc">Location</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="pref_title_cache">Clear Image Cache</string>
+    <string name="pref_title_theme">Theme Color</string>
+    <string name="pref_title_rate">Rate</string>
+    <string name="pref_title_about">About</string>
+    <string name="pref_title_logout">Logout</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+
+    <string name="pref_key_notif">key_notifications</string>
+    <string name="pref_key_loc">key_location</string>
+    <string name="pref_key_ringtone">key_ringtone</string>
+    <string name="pref_key_vibrate">key_vibrate</string>
+    <string name="pref_key_reset_cache">key_reset_cache</string>
+    <string name="pref_key_theme">key_theme</string>
+    <string name="pref_key_logout">key_logout</string>
+    <string name="pref_key_feedback">key_feedback</string>
+    <string name="pref_key_rate">key_rate</string>
+    <string name="pref_key_terms_service">key_terms_service</string>
+    <string name="pref_key_about">key_about</string>
+
+    <string name="message_clear_image_cache">Are you sure want to clear image cache?</string>
+    <string name="message_after_clear_image_cache">Image cache successfully clear</string>
+    <string name="message_logout">Are you sure you want to logout?</string>
+    <string name="title_dialog_theme">Color Theme</string>
+
+    <!-- ==================== NOT USING CODE ...Strings related to Drawer Menu =================================== -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_nav_all">All Services</string>
+    <string name="title_nav_fav">Favorites</string>
+
+    <string name="title_nav_featured">Featured Places</string>
+    <string name="title_nav_tour">Tourist Destination</string>
+    <string name="title_nav_food">Food \u0026 Drink</string>
+    <string name="title_nav_hotels">Hotels</string>
+    <string name="title_nav_ent">Entertainment</string>
+    <string name="title_nav_sport">Sport</string>
+    <string name="title_nav_shop">Shopping</string>
+    <string name="title_nav_transport">Transportation</string>
+    <string name="title_nav_religion">Religion</string>
+    <string name="title_nav_public">Public Services</string>
+    <string name="title_nav_money">Money</string>
+
+    <string name="title_fragment_fav">Favorites</string>
+
+
+    <!-- ==================== NOT USING CODE ...Strings related to Service Drawer Menu =================================== -->
+
+    <string name="title_nav_carp">Carpenter</string>
+    <string name="title_nav_driver">Driver</string>
+    <string name="title_nav_elec">Electrician</string>
+    <string name="title_nav_gard">Gardener</string>
+    <string name="title_nav_househ">House Helper</string>
+    <string name="title_nav_laundryh">Laundry Helper</string>
+    <string name="title_nav_mech">Mechanic</string>
+    <string name="title_nav_paint">Painter</string>
+    <string name="title_nav_photo">Photographer</string>
+    <string name="title_nav_plum">Plumber</string>
+    <string name="title_nav_tech">Technician</string>
+
+
+    <!--exit notification-->
+    <string name="press_again_exit_app">Press again to exit</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin  Fusce quis mauris a enim sollicitudin, Fusce quis mauris a enim sollicitudin  Fusce quis Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur ipsum in placerat molestie.  Fusce quis mauris a enim sollicitudin  Fusce quis mauris a enim sollicitudin, \n \nFusce quis mauris a enim sollicitudin  Fusce quis mauris a enim sollicitudin, Fusce quis mauris a enim sollicitudin  Fusce quis mauris a enim sollicitudinmauris a enim sollicitudin, Fusce quis mauris a enim sollicitudin  Fusce quis mauris a enim sollicitudin  </string>
+
+    <!-- facebook -->
+    <string name="facebook_app_id">1827634550809454</string>
+    <string name="com_facebook_loginview_log_out_button">Log out</string>
+    <string name="com_facebook_loginview_log_in_button">Log in</string>
+    <string name="com_facebook_loginview_log_in_button_long">Log in with Facebook</string>
+
+
+    <string name="google_cliend_id">1001638527795-1st2fftl2svfbore1mikrk4gcsqjtur1.apps.googleusercontent.com</string>
+
+
+    <string name="selectdate">Pick Date</string>
+    <string name="title_activity_activity_main"></string>
+    <string name="title_activity_my_profile">My Profile</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <string name="gps_network_not_enabled">Your GPS is not available</string>
+    <string name="open_location_settings">Open location settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+</resources>

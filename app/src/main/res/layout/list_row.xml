@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:background="@color/colorAccentLight"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linearlayouts"
+    >
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/lyt_parent"
+        style="@style/RippleStyleWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_small">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+        android:padding="16dp">
+
+
+
+        <LinearLayout
+    android:layout_width="273dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/reservename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20sp"
+        />
+
+        <TextView
+        android:id="@+id/reservedate"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:textSize="16sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/reservedatae"
+                android:layout_width="58dp"
+                android:layout_height="51dp"
+                android:text="#"
+                android:textSize="50sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.balysv.materialripple.MaterialRippleLayout>
+
+</LinearLayout>
+

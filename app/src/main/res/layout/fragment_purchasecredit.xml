@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/grey_soft">
+
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <ImageView
+            android:layout_width="97dp"
+            android:layout_height="122dp"
+            app:srcCompat="@drawable/img_coin"
+            android:id="@+id/imageView2"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp" />
+
+
+        <TextView
+            android:text="You have Credits left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvMyCredit"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="serif"
+            tools:layout_editor_absoluteY="166dp"
+            tools:layout_editor_absoluteX="90dp"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/imageView2"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="and"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/andTV"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:layout_below="@+id/tvMyCredit"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="You have Free Credits left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvFreeCredit"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            tools:ignore="MissingConstraints"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:layout_below="@+id/andTV"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/CreditButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="#A72870"
+            android:fontFamily="serif"
+            android:textColor="@color/grey_soft"
+            android:text="Buy via Pay Maya"
+            tools:ignore="MissingConstraints"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/GcashButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="#A72870"
+            android:fontFamily="serif"
+            android:textColor="@color/grey_soft"
+            android:text="Buy via Gcash"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_below="@+id/CreditButton"
+            android:layout_alignStart="@+id/CreditButton"
+            android:layout_marginTop="15dp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/smartpadalaButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="#A72870"
+            android:fontFamily="serif"
+            android:textColor="@color/grey_soft"
+            android:text="Buy via SmartPadala"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_marginTop="17dp"
+            android:layout_below="@+id/GcashButton"
+            android:layout_alignStart="@+id/GcashButton" />
+
+    </RelativeLayout>
+
+</FrameLayout>

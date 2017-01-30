@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow">
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/ReservedateSubmitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF0080"
+        android:text="Reserve Queue by date"
+        android:layout_below="@+id/ReserveSubmitBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/ReserveSubmitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF0080"
+        android:text="Reserve Now"
+        android:layout_marginTop="244dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

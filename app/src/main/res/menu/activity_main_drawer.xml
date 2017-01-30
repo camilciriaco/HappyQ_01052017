@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#00aced" >
+
+    <group android:checkableBehavior="single"
+        >
+
+        <group android:id="@+id/top_sub">
+
+            <item
+                android:id="@+id/nav_myprofile"
+                android:title="My Profile"
+                android:icon="@drawable/ic_username"
+                />
+            <item
+                android:id="@+id/nav_all"
+                android:title="All services"
+                android:icon="@drawable/ic_nav_all"
+
+                />
+            <item
+                android:id="@+id/nav_purchasecredit"
+                android:title="Purchase Credit"
+                android:icon="@drawable/ic_credit"
+                />
+            <item
+                android:id="@+id/nav_queueprices"
+                android:title="HappyQ Prices"
+                android:icon="@drawable/ic_credit"
+                />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Logout"
+                android:icon="@drawable/ic_logout"
+                />
+        </group>
+
+    </group>
+
+</menu>

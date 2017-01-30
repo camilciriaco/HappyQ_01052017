@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "953962379134",
+    "project_id": "happyq-151905"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953962379134:android:a857167867404357",
+        "android_client_info": {
+          "package_name": "com.happyq.rvn.happyq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953962379134-btt0ftl83bbnuculdtcosgcmhjgk3bdq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.happyq.rvn.happyq",
+            "certificate_hash": "23B137EBBCDF6E2FC6D1E7BB15644C70A63A60F7"
+          }
+        },
+        {
+          "client_id": "953962379134-dmpvhu0tt4n1l30b8oqugded8csdj6sq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7R32THPQXPhZU1XVbQ8eIa7riOKNoT0I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/grey_soft">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/addcreditButton"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="#EE9E5C"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/grey_soft"
+            android:text="Add Credit"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_marginBottom="153dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:text="20 Credits and 1 Free Queues = 20 Pesos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv20php"
+            android:textColor="@color/textviewcolor"
+            android:textSize="16sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginBottom="13dp"
+            android:layout_above="@+id/tv50php"
+            android:layout_alignStart="@+id/tv50php" />
+
+        <TextView
+            android:text="50 Credits and 3 Free Queues = 50 Pesos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv50php"
+            android:textColor="@color/textviewcolor"
+            android:textSize="16sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@+id/tv100php"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="100 Credits and 10 Free Queues = 100 Pesos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv100php"
+            android:textColor="@color/textviewcolor"
+            android:textSize="16sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_above="@+id/tv500php"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="11dp" />
+
+        <TextView
+            android:text="500 Credits and 55 Free Queues = 500 Pesos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv500php"
+            android:textColor="@color/textviewcolor"
+            android:textSize="16sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_above="@+id/tv1000php"
+            android:layout_alignStart="@+id/tv100php"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:text="10 Credits = 10 Pesos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv10php"
+            android:textColor="@color/textviewcolor"
+            android:textSize="16sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_alignBottom="@+id/tv20php"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="1000 Credits and 125 Free Queues = 1000Pesos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv1000php"
+            android:textColor="@color/textviewcolor"
+            android:textSize="16sp"
+            style="@android:style/Widget.DeviceDefault.Light.TextView"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</FrameLayout>

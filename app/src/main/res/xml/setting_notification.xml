@@ -1,0 +1,55 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_category_notif">
+
+        <!-- A 'parent' preference, which enables/disables child preferences (below) when checked/unchecked. -->
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_notif"
+            android:title="@string/pref_title_notif" />
+
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/pref_key_loc"
+            android:title="@string/pref_title_loc" />
+
+        <!-- Allows the user to choose a ringtone in the 'notification' category. -->
+        <!-- NOTE: This preference will be enabled only when the checkbox above is checked. -->
+        <!-- NOTE: RingtonePreference's summary should be set to its value by the activity code. -->
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency="@string/pref_key_notif"
+            android:key="@string/pref_key_ringtone"
+            android:ringtoneType="notification"
+            android:title="@string/pref_title_ringtone" />
+
+        <!-- NOTE: This preference will be enabled only when the checkbox above is checked. -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="@string/pref_key_notif"
+            android:key="@string/pref_key_vibrate"
+            android:title="@string/pref_title_vibrate" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="About">
+        <Preference
+            android:title="About HappyQ"
+            android:key="@string/pref_key_about"/>
+        <Preference
+            android:title="Terms of Service"
+            android:key="@string/pref_key_terms_service"/>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="Feedback">
+        <Preference
+           android:title="Rate HappyQ in Google Play"
+           android:key="@string/pref_key_rate"/>
+
+        <Preference
+            android:title="Send Feedback"
+            android:key="@string/pref_key_feedback"/>
+</PreferenceCategory>
+</PreferenceScreen>

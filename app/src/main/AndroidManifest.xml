@@ -41,6 +41,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".reservation_query.QueueNumber">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".reservation_query.Date_Query">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".reservation_query.Now_Query">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".sigin.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,13 +98,11 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:name=".ActivitySetting"
             android:label="@string/activity_title_settings" />
 
-        <activity
-            android:name=".QueueNumber"
-            android:label="QueueNumber" />
         <!-- [START Facebook] -->
         <activity
             android:name="com.facebook.FacebookActivity"

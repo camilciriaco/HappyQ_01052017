@@ -34,6 +34,9 @@ public class AdapterRegQueue extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
                 tvAnnouncement = (TextView) v.findViewById(R.id.tv_announcement);
                 tvAtitle = (TextView) v.findViewById(R.id.tv_Atitle);
+
+                tvAnnouncement.setSelected(true);
+                tvAtitle.setSelected(true);
             }
         }
 

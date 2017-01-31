@@ -16,9 +16,11 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.happyq.rvn.happyq.R;
 import com.happyq.rvn.happyq.data.adapter.MainQAdapter;
+import com.happyq.rvn.happyq.fragment.listing.AdapterRVQueue;
 import com.happyq.rvn.happyq.fragment.listing.AdapterRegQueue;
 import com.happyq.rvn.happyq.fragment.listing.DataQueue;
 import com.happyq.rvn.happyq.fragment.listing.RecyclerItemClickListener;
@@ -74,6 +76,7 @@ public class MainFragment extends Fragment {
                     public void run() {
                         //mAdapter.notifyDataSetChanged();
                         new AsyncFetch().execute();
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 }, 2000);
             }
@@ -170,28 +173,63 @@ public class MainFragment extends Fragment {
 
             try {
 
-                JSONArray jArray = new JSONArray(result);
+                JSONObject aray = new JSONObject(result);
+                DataQueue QueueDataa = new DataQueue();
 
-                // Extract data from json and store into ArrayList as class objects
-                for(int i=0;i<=jArray.length();i++){
-                    notvisiblea();
-                    JSONObject json_data = jArray.getJSONObject(i);
-                    DataQueue QueueData = new DataQueue();
-                    QueueData.rqueuename= json_data.getString("name");
-                    QueueData.rqueuestime = json_data.getString("t_start");
-                    QueueData.rqueueetime = json_data.getString("t_end");
-                    QueueData.rqueueoperationday = json_data.getString("days");
-                    QueueData.Atitle = json_data.getString("header");
-                    QueueData.Announcement = json_data.getString("message");
+
+
+                    try{
+
+                    JSONArray jsonArrayops = aray.getJSONArray("ops");
+                    int ja = jsonArrayops.length();
+                    // Extract data from json and store into ArrayList as class objects
+                    for (int x = 0; x <= jsonArrayops.length(); x++) {
+                        notvisiblea();
+                        JSONObject json_dataa = jsonArrayops.getJSONObject(x);
+
+                        //QueueData.queuename= json_data.getString("name");
+                        QueueDataa.rqueuestime = json_dataa.getString("t_start");
+                        QueueDataa.rqueueetime = json_dataa.getString("t_end");
+                        QueueDataa.rqueueoperationday = json_dataa.getString("days");
+
+
+                        //JSONObject json = new JSONObject(result);
+                        JSONArray jArray = aray.getJSONArray("announce");
+
+                        int j = jArray.length();
+                        // Extract data from json and store into ArrayList as class objects
+                        for (int i = 0; i <= jArray.length(); i++) {
+                            notvisiblea();
+                            JSONObject json_data = jArray.getJSONObject(i);
+
+                            //QueueData.queuename= json_data.getString("name");
+                            QueueDataa.Atitle = json_data.getString("header");
+                            QueueDataa.Announcement = json_data.getString("message");
+                            data.add(QueueDataa);
+                            mAdapter = new AdapterRegQueue(data);
+                            recyclerView.setAdapter(mAdapter);
+                        }
+                    }
+
+                    } catch (JSONException e) {
+                        // Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    //DataQueue QueueData = new DataQueue();
+                    //QueueData.queuename= json_data.getString("name");
+                    //QueueData.Atitle =json_data.getString("header");
+                    //QueueData.Announcement = innerObject.getString("message");
+                    //data.add(QueueData);
+//                    QueueData.rqueuestime = json_data.getString("t_start");
+//                    QueueData.rqueueetime = json_data.getString("t_end");
+//                    QueueData.rqueueoperationday = json_data.getString("days");
 
                     //QueueData.fishImage= json_data.getString("fish_img");
                     //QueueData.price= json_data.getInt("price");
-                    data.add(QueueData);
-                    mAdapter = new AdapterRegQueue(data);
-                    mSwipeRefreshLayout.setRefreshing(false);
-                    recyclerView.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
-                }
+
+
+
+
             } catch (JSONException e) {
                 // Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
             }

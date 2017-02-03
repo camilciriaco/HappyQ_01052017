@@ -36,6 +36,8 @@ public class Databasehandlerr extends SQLiteOpenHelper {
     String _gmail_ID;
     String _gmail_name;
     String _gmail_email;
+    String _gmail_firstname;
+    String _gmail_lastname;
     String _fb_id;
     String _fb_firstname;
     String _fb_middlename;
@@ -56,6 +58,10 @@ public class Databasehandlerr extends SQLiteOpenHelper {
     private static final String KEY_G_id           ="G_ID";
     private static final String KEY_G_name         ="G_name";
     private static final String KEY_G_email        ="G_email";
+    private static final String KEY_G_firstname        ="G_firstname";
+    private static final String KEY_G_lastname        ="G_lastname";
+
+
 
     //table columns for TABLE_USER
         private static final String KEY_ID          ="user_id";
@@ -76,7 +82,6 @@ public class Databasehandlerr extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         createTableuserlogin(db);
-        //createTablefbuserlogin(db);
         createTablegmailuserlogin(db);
         createTablefuserlogin(db);
 
@@ -99,7 +104,6 @@ public class Databasehandlerr extends SQLiteOpenHelper {
                 + KEY_FBUID + " INTEGER PRIMARY KEY, "
                 + KEY_fb_id + " TEXT, "
                 + KEY_fb_firstname + " TEXT, "
-                +  KEY_fb_middlename + " TEXT, "
                 +  KEY_fb_lastname + " TEXT "
                 + ")";
         db.execSQL(CREATE_TABLE);
@@ -110,8 +114,9 @@ public class Databasehandlerr extends SQLiteOpenHelper {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_gMAIL_USER + " ( "
                 + KEY_GUID      + " INTEGER PRIMARY KEY, "
                 + KEY_G_id      + " TEXT, "
-                + KEY_G_name    + " TEXT, "
                 + KEY_G_email   + " TEXT "
+                + KEY_G_firstname   + " TEXT, "
+                + KEY_G_lastname   + " TEXT "
 
                 + ")";
         db.execSQL(CREATE_TABLE);
@@ -150,13 +155,15 @@ public class Databasehandlerr extends SQLiteOpenHelper {
      * */
 
 
-    public void addUserGMAILlogin(String email, String name, String gmail_id) {
+    public void addUserGMAILlogin(String email, String gmail_id, String gmail_lastname, String gmail_firstname) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(email, get_gmail_email()); // Email
-        values.put(name, get_gmail_name()); // Unique ID
+        //values.put(name, get_gmail_name()); // name
         values.put(gmail_id, get_gmail_ID()); // Created At
+        values.put(gmail_firstname, get_gmail_firstname());
+        values.put(gmail_lastname, get_gmail_lastname());
 
         // Inserting Row
         long id = db.insert(TABLE_gMAIL_USER, null, values);
@@ -165,12 +172,11 @@ public class Databasehandlerr extends SQLiteOpenHelper {
         Log.d(TAG, "New user inserted into sqlite: " + id);
     }
 
-    public void addUserfblogin(String firstname, String middlename, String lastname, String fb_id) {
+    public void addUserfblogin(String firstname, String lastname, String fb_id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(firstname, get_fb_firstname()); //firstname
-        values.put(middlename, get_fb_middlename()); // middlename
         values.put(lastname, get_fb_lastname()); // lastname
         values.put(fb_id, get_fb_id()); // facebook_id
 
@@ -374,6 +380,24 @@ public class Databasehandlerr extends SQLiteOpenHelper {
     public String get_gmail_email() {
         // TODO Auto-generated method stub
         return _gmail_email;
+    }
+
+
+    public void set_gmail_firstname(String gmail_firstname){
+        this._gmail_email = gmail_firstname;
+    }
+    public String get_gmail_firstname() {
+        // TODO Auto-generated method stub
+        return _gmail_firstname;
+    }
+
+
+    public void set_gmail_lastname(String gmail_lastname){
+        this._gmail_email = gmail_lastname;
+    }
+    public String get_gmail_lastname() {
+        // TODO Auto-generated method stub
+        return _gmail_lastname;
     }
 
 

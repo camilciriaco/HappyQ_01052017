@@ -31,8 +31,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.happyq.rvn.happyq.reservation_query.QueueNumber;
+import com.happyq.rvn.happyq.reservation_query.QueueToolbar;
 
 /**
  * Created by RVN on 1/3/2017.
@@ -84,7 +83,7 @@ public class All_fragment extends Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent i = new Intent(getActivity(), QueueNumber.class);
+                Intent i = new Intent(getActivity(), QueueToolbar.class);
                 startActivity(i);
             }
         }));

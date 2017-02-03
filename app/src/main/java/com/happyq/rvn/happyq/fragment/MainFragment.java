@@ -75,6 +75,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public void run() {
                         //mAdapter.notifyDataSetChanged();
+                        //onRefresh();
                         new AsyncFetch().execute();
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
@@ -176,41 +177,49 @@ public class MainFragment extends Fragment {
                 JSONObject aray = new JSONObject(result);
                 DataQueue QueueDataa = new DataQueue();
 
-
-
                     try{
 
-                    JSONArray jsonArrayops = aray.getJSONArray("ops");
-                    int ja = jsonArrayops.length();
-                    // Extract data from json and store into ArrayList as class objects
-                    for (int x = 0; x <= jsonArrayops.length(); x++) {
-                        notvisiblea();
-                        JSONObject json_dataa = jsonArrayops.getJSONObject(x);
-
-                        //QueueData.queuename= json_data.getString("name");
-                        QueueDataa.rqueuestime = json_dataa.getString("t_start");
-                        QueueDataa.rqueueetime = json_dataa.getString("t_end");
-                        QueueDataa.rqueueoperationday = json_dataa.getString("days");
-
-
-                        //JSONObject json = new JSONObject(result);
-                        JSONArray jArray = aray.getJSONArray("announce");
-
-                        int j = jArray.length();
+                        JSONArray jsonArrayimg = aray.getJSONArray("banner");
+                        int img = jsonArrayimg.length();
                         // Extract data from json and store into ArrayList as class objects
-                        for (int i = 0; i <= jArray.length(); i++) {
+                        for (int a = 0; a <= jsonArrayimg.length(); a++) {
                             notvisiblea();
-                            JSONObject json_data = jArray.getJSONObject(i);
+                            JSONObject json_dataaa = jsonArrayimg.getJSONObject(a);
 
                             //QueueData.queuename= json_data.getString("name");
-                            QueueDataa.Atitle = json_data.getString("header");
-                            QueueDataa.Announcement = json_data.getString("message");
-                            data.add(QueueDataa);
-                            mAdapter = new AdapterRegQueue(data);
-                            recyclerView.setAdapter(mAdapter);
-                        }
-                    }
+                            QueueDataa.banners = json_dataaa.getString("directory");
 
+
+                            JSONArray jsonArrayops = aray.getJSONArray("ops");
+                            int ja = jsonArrayops.length();
+                            // Extract data from json and store into ArrayList as class objects
+                            for (int x = 0; x <= jsonArrayops.length(); x++) {
+                                notvisiblea();
+                                JSONObject json_dataa = jsonArrayops.getJSONObject(x);
+
+                                //QueueData.queuename= json_data.getString("name");
+                                QueueDataa.rqueuestime = json_dataa.getString("t_start");
+                                QueueDataa.rqueueetime = json_dataa.getString("t_end");
+                                QueueDataa.rqueueoperationday = json_dataa.getString("days");
+
+
+                                //JSONObject json = new JSONObject(result);
+                                JSONArray jArray = aray.getJSONArray("announce");
+                                int j = jArray.length();
+                                // Extract data from json and store into ArrayList as class objects
+                                for (int i = 0; i <= jArray.length(); i++) {
+                                    notvisiblea();
+                                    JSONObject json_data = jArray.getJSONObject(i);
+
+                                    //QueueData.queuename= json_data.getString("name");
+                                    QueueDataa.Atitle = json_data.getString("header");
+                                    QueueDataa.Announcement = json_data.getString("message");
+                                    data.add(QueueDataa);
+                                    mAdapter = new AdapterRegQueue(data);
+                                    recyclerView.setAdapter(mAdapter);
+                                }
+                            }
+                        }
                     } catch (JSONException e) {
                         // Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                     }
@@ -245,4 +254,6 @@ public class MainFragment extends Fragment {
         lyt_not_found.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
     }
+
+
 }

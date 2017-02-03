@@ -89,7 +89,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     Button btlogin, btnRevokeAccess;
     TextView btregister, Etforgotpw;
     EditText EtLoginUsername, EtLoginPwd;
-    DatabaseHandler db;
     RelativeLayout relativeLayout;
 
     private ImageView user_image;
@@ -174,41 +173,41 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         dbdb = new Databasehandlerr(this);
         relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout);
         LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-//        boolean gps_enabled = false;
-//        boolean network_enabled = false;
-//
-//        try {
-//            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//        } catch(Exception ex) {}
-//
-//        try {
-//            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-//        } catch(Exception ex) {}
-//
-//        if(!gps_enabled && !network_enabled) {
-//            // notify user
-//            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-//            dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-//            dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-//                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//                    context.startActivity(myIntent);
-//                    //get gps
-//                    //btnCapturePicture.setVisibility(View.VISIBLE);
-//                }
-//            });
-//            dialog.setNegativeButton(context.getString(Integer.parseInt("Cancel")), new DialogInterface.OnClickListener() {
-//
-//                @Override
-//                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-//                    // TODO Auto-generated method stub
-//                    //btnCapturePicture.setVisibility(View.GONE);
-//                    //tvlat.setText("Please Turn on your Location");
-//                }
-//            });
-//            dialog.show();
-//        }
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch(Exception ex) {}
+
+        if(!gps_enabled && !network_enabled) {
+            // notify user
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+            dialog.setPositiveButton(context.getResources().getString(R.string.open_location_settings), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    context.startActivity(myIntent);
+                    //get gps
+                    //btnCapturePicture.setVisibility(View.VISIBLE);
+                }
+            });
+            dialog.setNegativeButton(context.getString(Integer.parseInt("Cancel")), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    // TODO Auto-generated method stub
+                    //btnCapturePicture.setVisibility(View.GONE);
+                    //tvlat.setText("Please Turn on your Location");
+                }
+            });
+            dialog.show();
+        }
 
         loginButton.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
         //callbackManager = CallbackManager.Factory.create();
@@ -377,6 +376,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 Log.d(TAG, "Login Response: " + response.toString());
                 hideDialog();
 
+
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
@@ -388,6 +388,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                         sessions.setLogin(true);
 
                         try {
+
                             dbdb.setEmail(email);
                             dbdb.setPassword(password);
 
@@ -481,7 +482,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             String email = acct.getEmail();
             String name = acct.getDisplayName();
             String Idgmail = acct.getId();
-            checkGooglelogin(email,name,Idgmail);
+            String fname = acct.getGivenName();
+            String lname = acct.getFamilyName();
+            checkGooglelogin(email,fname,lname,Idgmail);
 
             Log.e(TAG, "display name: " + acct.getDisplayName());
             Log.e(TAG, "display email: " + acct.getEmail());
@@ -526,7 +529,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     /**
      * function to verify login details in mysql db
      * */
-    private void checkGooglelogin(final String email, final String name , final String gmail_id) {
+    private void checkGooglelogin(final String gmail_email, final String gmail_fname , final String gmail_lname,final String gmail_id) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
         mProgressDialog = new ProgressDialog(this);
@@ -555,13 +558,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
                         try {
 
-                            dbdb.set_gmail_email( email);
-                            dbdb.set_gmail_name(name);
+                            dbdb.set_gmail_email(gmail_email);
+                            dbdb.set_gmail_firstname(gmail_fname);
+                            dbdb.set_gmail_lastname(gmail_lname);
                             dbdb.set_gmail_ID(gmail_id);
+
 
                             // Launch main activity
                             Toast.makeText(Login.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
-                            dbdb.addUserGMAILlogin(email, name,gmail_id);
+                            dbdb.addUserGMAILlogin(gmail_email,gmail_id,gmail_fname,gmail_lname);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -591,8 +596,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             protected Map<String, String> getParams () {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("name", name);
+                params.put("gmail_email", gmail_email);
+                params.put("gmail_fname", gmail_fname);
+                params.put("gmail_lname", gmail_lname);
                 params.put("gmail_id", gmail_id);
                 return params;
             }
@@ -600,7 +606,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
-
 
 
     @Override
@@ -714,12 +719,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         if(profile != null){
 
             String fbname = profile.getFirstName();
-            String fbmiddle = profile.getMiddleName();
             String fblastname = profile.getLastName();
             String facebook_id = profile.getId();
             //String facebook_image = profile.getProfilePictureUri(150, 150).toString();
 
-            checkffblogin(fbname,fbmiddle,fblastname, facebook_id);
+            checkffblogin(fbname,fblastname, facebook_id);
 
             Intent main = new Intent(Login.this, Activitymain.class);
             main.putExtra("fbname", profile.getFirstName());
@@ -736,7 +740,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
 
 
-    private void checkffblogin(final String firstname, final String middlename , final String lastname, final String facebook_id) {
+    private void checkffblogin(final String firstname, final String lastname, final String facebook_id) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
         mProgressDialog = new ProgressDialog(this);
@@ -765,14 +769,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                         try {
 
                             dbdb.set_fb_firstname(firstname);
-                            dbdb.set_fb_middlename(middlename);
                             dbdb.set_fb_lastname(lastname);
                             dbdb.set_fb_id(facebook_id);
 
 
                             // Launch main activity
                             Toast.makeText(Login.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
-                            dbdb.addUserfblogin(firstname, middlename, lastname, facebook_id);
+                            dbdb.addUserfblogin(firstname, lastname, facebook_id);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -802,16 +805,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             protected Map<String, String> getParams () {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("firstname", firstname);
-                params.put("middlename", middlename);
-                params.put("lastname", lastname);
-                params.put("facebook_id", facebook_id);
+                params.put("fb_fname", firstname);
+                params.put("fb_lname", lastname);
+                params.put("fb_id", facebook_id);
                 return params;
             }
         };
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
+
 
 
     private void setProfileToView(JSONObject jsonObject) {
@@ -902,6 +906,89 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         }
         return super.onKeyDown(keyCode, event);
     }
+//
+//    private void registerInternetCheckReceiver() {
+//        IntentFilter internetFilter = new IntentFilter();
+//        internetFilter.addAction("android.net.wifi.STATE_CHANGE");
+//        internetFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+//
+//        registerReceiver(broadcastReceiver, internetFilter);
+//    }
+//
+//    /**
+//     *  Runtime Broadcast receiver inner class to capture internet connectivity events
+//     */
+//    public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String status = getConnectivityStatusString(context);
+//            setSnackbarMessage(status,false);
+//        }
+//    };
+//
+//    public static int getConnectivityStatus(Context context) {
+//        ConnectivityManager cm = (ConnectivityManager) context
+//                .getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//        if (null != activeNetwork) {
+//            if(activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+//                return TYPE_WIFI;
+//
+//            if(activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+//                return TYPE_MOBILE;
+//        }
+//        return TYPE_NOT_CONNECTED;
+//    }
+//
+//    public static String getConnectivityStatusString(Context context) {
+//        int conn = getConnectivityStatus(context);
+//        String status = null;
+//        if (conn == TYPE_WIFI) {
+//            status = "Wifi enabled";
+//        } else if (conn == TYPE_MOBILE) {
+//            status = "Mobile data enabled";
+//        } else if (conn == TYPE_NOT_CONNECTED) {
+//            status = "Not connected to Internet";
+//        }
+//        return status;
+//    }
+//    private void setSnackbarMessage(String status,boolean showBar) {
+//        String internetStatus="";
+//        if(status.equalsIgnoreCase("Wifi enabled")||status.equalsIgnoreCase("Mobile data enabled")){
+//            internetStatus="Internet Connected";
+//        }else {
+//            internetStatus="No Internet Connection";
+//        }
+//        snackbar = Snackbar
+//                .make(relativeLayout, internetStatus, Snackbar.LENGTH_INDEFINITE)
+//                .setAction("close", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        snackbar.dismiss();
+//                    }
+//                });
+//
+//        View sbView = snackbar.getView();
+//        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+//        //textView.setTextColor(Color.WHITE);
+//        if(internetStatus.equalsIgnoreCase("No Internet Connection")){
+//            if(internetConnected){
+//                snackbar.show();
+//                snackbar.setActionTextColor(Color.WHITE);
+//                textView.setTextColor(Color.RED);
+//                internetConnected=false;
+//            }
+//        }   else{
+//            if(!internetConnected){
+//                internetConnected=true;
+//                snackbar.setActionTextColor(Color.WHITE);
+//                textView.setTextColor(Color.GREEN);
+//                snackbar.show();
+//            }
+//
+//        }
+//    }
+
 
 }
 

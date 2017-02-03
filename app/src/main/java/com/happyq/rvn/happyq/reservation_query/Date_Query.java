@@ -1,7 +1,10 @@
 package com.happyq.rvn.happyq.reservation_query;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +57,7 @@ public class Date_Query extends AppCompatActivity {
                         tvDate.setText("Date not Selected");
                     }
                     else {
-                        Toast.makeText(getApplicationContext(),"Selected date is " + DateFormat.format("MMM/dd/yyyy", selectedDate), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Selected date is " + DateFormat.format("MMM dd, yyyy", selectedDate), Toast.LENGTH_SHORT).show();
                         tvDate.setText(DateFormat.format("MMMM dd, yyyy", selectedDate)); //Output:Apr/07/2014
                     }
                 }
@@ -62,6 +65,18 @@ public class Date_Query extends AppCompatActivity {
         } catch (Exception e) {
             e.toString();
         }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar.setTitle(Html.fromHtml("<font color='#ffffff'>Reservation</font>"));
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent openReserve_intent1 = new Intent(Date_Query.this, QueueToolbar.class);
+                startActivity(openReserve_intent1);
+            }
+        });
 
     }
 

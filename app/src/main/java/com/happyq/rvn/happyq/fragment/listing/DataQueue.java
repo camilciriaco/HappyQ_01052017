@@ -22,6 +22,8 @@ public class DataQueue  {
     public String Announcement;
     public String Atitle;
 
+    //img
+    public String banners;
 
 
 

@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".reservation_query.QueueNumber">
+        <activity android:name=".reservation_query.QueueToolbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -119,6 +119,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider1827634550809454"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
         <!-- [END Facebook] -->
 
 
@@ -151,6 +156,11 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"></activity>
+
+
+
+
+
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

@@ -3,6 +3,9 @@ package com.happyq.rvn.happyq.fragment.listing;
 /**
  * Created by RVN on 1/18/2017.
  */
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.happyq.rvn.happyq.R;
+import com.happyq.rvn.happyq.detail.ItemDetailActivity;
+import com.happyq.rvn.happyq.detail.ItemDetailFragment;
+
 import java.util.List;
 
 public class AdapterRVQueue extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -49,17 +55,19 @@ public class AdapterRVQueue extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder myHolder= (ViewHolder) holder;
-        DataQueue current=mDataset.get(position);
+        final ViewHolder myHolder = (ViewHolder) holder;
+        DataQueue current = mDataset.get(position);
         myHolder.txtquename.setText(current.queuename);
         myHolder.tvqueueactivity.setText(current.queueactivity);
         myHolder.tvqueuestatus.setText(current.queuestatus);
         myHolder.tvqueuemaxreserve.setText(current.queuemaxreserve);
 
-    }
 
+
+    }
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
-}
+
+    }

@@ -30,10 +30,15 @@
 
     <color name="dark_overlay">#73000000</color>
 
-    <color name="text">#4d505b</color>
+    <color name="text">#696b72</color>
     <color name="textred">#ca362c</color>
     <color name="textwhite">#fff</color>
     <color name="textviewcolor">#4b4e56</color>
+
+    <color name="bg_soft">#90FFEB8A</color>
+
+
+    <color name="coolgreen">#06D85F</color>
 
 
     <string-array name="arr_main_color_name">

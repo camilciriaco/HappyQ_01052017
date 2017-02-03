@@ -3,13 +3,17 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/lyt_parent"
         style="@style/RippleStyleWhite"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_place_height"
-        android:layout_margin="@dimen/spacing_small">
+        android:layout_height="200dp"
+        android:layout_margin="2dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,18 +25,18 @@
             <ImageView
                 android:id="@+id/iv_cover"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:background="@color/grey_soft"
-                android:src="@drawable/happyqstraight"
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
+                android:background="#FFEB8A"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:layout_alignParentBottom="true" />
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/rvl" />
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="35dp"
             android:background="@drawable/shape_overlay"
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large"
@@ -52,8 +56,8 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:textAllCaps="true"
                 android:layout_below="@id/iv_cover"
-                android:textColor="@color/textred"
-                android:textSize="9sp"
+                android:textColor="#0F2E9D"
+                android:textSize="10sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -66,8 +70,8 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:textAllCaps="false"
                 android:layout_below="@id/tv_Atitle"
-                android:textColor="@color/textred"
-                android:textSize="11sp"
+                android:textColor="#0F2E9D"
+                android:textSize="14sp"
                 />
 
             </RelativeLayout>
@@ -80,7 +84,6 @@
                 android:id="@+id/rva"
                 android:layout_above="@+id/rva"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true">
 
 
@@ -117,7 +120,6 @@
                 android:layout_below="@id/tv_stime"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-
 
             <TextView
                 android:id="@+id/tv_number"
@@ -184,4 +186,5 @@
             </RelativeLayout>
         </RelativeLayout>
    </com.balysv.materialripple.MaterialRippleLayout>
+</LinearLayout>
 </RelativeLayout>

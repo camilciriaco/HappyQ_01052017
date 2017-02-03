@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -58,7 +59,7 @@ import java.util.Map;
 public class Register extends Activity implements View.OnClickListener {
     Button btRegister;
     TextView btCancel;
-    EditText etUsername, etPwd, etConPwd, etMobileNo, etEmail, etbirthday, etname, etinvitecode;
+    EditText etUsername, etPwd, etConPwd, etEmail, etbirthday, etname, etinvitecode;
     RadioGroup etgender;
     RelativeLayout relativeLayout;
     //DatabaseHandler db;
@@ -84,10 +85,10 @@ public class Register extends Activity implements View.OnClickListener {
     public SessionManager sessions;
 
     //gender
-    RadioButton rbMale, rbFemale;
+    RadioButton rbMale, rbFemale, radioSexButton;
     String userGender;
     //Calendar
-    ImageButton ib;
+    ImageView ib;
     private Calendar cal;
     private int day;
     private int month;
@@ -119,13 +120,11 @@ public class Register extends Activity implements View.OnClickListener {
 
         etgender = (RadioGroup) findViewById(R.id.rgGender);
 
-
-
         etConPwd = (EditText) findViewById(R.id.registrationConfirmPassword);
 
 
         //gender
-        ib = (ImageButton) findViewById(R.id.imageButton1);
+        ib = (ImageView) findViewById(R.id.imageButton1);
         rbFemale = (RadioButton) findViewById(R.id.radioButton);
         rbMale = (RadioButton) findViewById(R.id.radioButton2);
 
@@ -136,7 +135,7 @@ public class Register extends Activity implements View.OnClickListener {
         year = cal.get(Calendar.YEAR);
 
         //gender
-        ib.setOnClickListener(this);
+
         sessions = new SessionManager(getApplicationContext());
         db = new Databasehandlerr(this);
 
@@ -194,11 +193,16 @@ public class Register extends Activity implements View.OnClickListener {
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
 
+                // get selected radio button from radioGroup
+                int selectedId = etgender.getCheckedRadioButtonId();
 
-                 Sname = etname.getText().toString().trim();
+                // find the radiobutton by returned id
+                radioSexButton = (RadioButton) findViewById(selectedId);
+
+                Sname = etname.getText().toString().trim();
                  Susername = etUsername.getText().toString().trim();
                  Semail = etEmail.getText().toString().trim();
-                 Sgender = "f";
+                 Sgender = radioSexButton.getText().toString();
                  Sbirthday = etbirthday.getText().toString().trim();
                  Sinvitecode = etinvitecode.getText().toString().trim();
                  Spassword = etPwd.getText().toString().trim();
@@ -252,9 +256,36 @@ public class Register extends Activity implements View.OnClickListener {
 
 
         });
+
+
+
+    ib.setOnClickListener(this);
     }
 
+    /*[Start]DATE PICKER*/
+    protected Dialog onCreateDialog ( int id){
+        return new DatePickerDialog(this, datePickerListener, year, month, day);
+    }
 
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
+        public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+            view.setMaxDate(System.currentTimeMillis());
+
+            Calendar userAge = new GregorianCalendar(selectedYear, selectedMonth, selectedDay);
+            Calendar minAdultAge = new GregorianCalendar();
+            minAdultAge.add(Calendar.YEAR, -18);
+            if (minAdultAge.before(userAge)) {
+                Toast.makeText(getApplicationContext(), "Must be atleast 18 years old", Toast.LENGTH_LONG).show();
+            } else {
+                etbirthday.setText(selectedDay + " / " + (selectedMonth + 1) + " / "
+                        + selectedYear);
+            }
+
+        }
+    };
+
+    /*[End]DATE PICKER*/
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
@@ -299,10 +330,6 @@ public class Register extends Activity implements View.OnClickListener {
                     startActivity(intent);
                     finish();
                     db.addUser(name, username, email, birthday, gender, invitecode, password);
-
-
-
-
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -390,32 +417,10 @@ public class Register extends Activity implements View.OnClickListener {
             mProgressDialog.dismiss();
     }
 
-    /*[Start]DATE PICKER*/
-    protected Dialog onCreateDialog(int id) {
-        return new DatePickerDialog(this, datePickerListener, year, month, day);
-    }
 
 
-    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
-        public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-            view.setMaxDate(System.currentTimeMillis());
 
-            Calendar userAge = new GregorianCalendar(selectedYear,selectedMonth,selectedDay);
-            Calendar minAdultAge = new GregorianCalendar();
-            minAdultAge.add(Calendar.YEAR, -18);
-            if (minAdultAge.before(userAge)) {
-                Toast.makeText(getApplicationContext(), "Must be atleast 18 years old", Toast.LENGTH_LONG).show();
-            } else
-            {
-                etbirthday.setText(selectedDay + " / " + (selectedMonth + 1) + " / "
-                        + selectedYear);
-            }
-
-        }
-    };
-
-    /*[End]DATE PICKER*/
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -432,30 +437,33 @@ public class Register extends Activity implements View.OnClickListener {
         return super.onKeyDown(keyCode, event);
     }
 
+//    @Override
+//    public void onClick(View v) {
+//            showDialog(0);
+//
+//// Check which radio button was clicked
+//            int checkRb = etgender.getCheckedRadioButtonId();
+//            switch(checkRb) {
+//                case R.id.radioButton:
+//                    if (rbMale.isChecked()) {
+//                        Sgender = "male";
+//                        userGender = "male";
+//                    }
+//                    break;
+//                case R.id.radioButton2:
+//                    if (rbFemale.isChecked()) {
+//                        userGender = "feMale";
+//                        Sgender = "female";
+//                    }
+//                    break;
+//            }
+//
+//    }
+
     @Override
     public void onClick(View v) {
-            showDialog(0);
-
-// Check which radio button was clicked
-            int checkRb = etgender.getCheckedRadioButtonId();
-            switch(checkRb) {
-                case R.id.radioButton:
-                    if (rbMale.isChecked()) {
-                        Sgender = "male";
-                        userGender = "male";
-                    }
-                    break;
-                case R.id.radioButton2:
-                    if (rbFemale.isChecked()) {
-                        userGender = "feMale";
-                        Sgender = "female";
-                    }
-                    break;
-            }
-
+    showDialog(0);
     }
-
-
 
 
     @Override
@@ -552,5 +560,8 @@ public class Register extends Activity implements View.OnClickListener {
             }
 
         }
-}}
+}
+
+
+}
 

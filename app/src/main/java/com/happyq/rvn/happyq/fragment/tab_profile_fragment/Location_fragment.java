@@ -9,11 +9,17 @@ import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.happyq.rvn.happyq.reservation_query.QueueToolbar;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,16 +39,32 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.happyq.rvn.happyq.R;
+import com.happyq.rvn.happyq.fragment.Queue_query;
+import com.happyq.rvn.happyq.sigin.Register;
+
+import java.util.zip.Inflater;
 
 import static android.Manifest.*;
 
-public class Location_fragment extends SupportMapFragment implements OnMapReadyCallback
-         {
+public class Location_fragment extends SupportMapFragment implements OnMapReadyCallback {
 
+    private ImageView icon;
+    private ImageView marker_bg;
+    private View marker_view;
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private GoogleMap mMap;
     private Marker marker;
+
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        marker_view = inflater.inflate(R.layout.maps_marker, null);
+//        icon = (ImageView) marker_view.findViewById(R.id.marker_icon);
+//        marker_bg = (ImageView) marker_view.findViewById(R.id.marker_bg);
+//return marker_view;
+//    }
+
 
     public Location_fragment() {
     }
@@ -71,8 +93,27 @@ public class Location_fragment extends SupportMapFragment implements OnMapReadyC
         //mMap = googleMap;
         mMap= configActivityMaps(googleMap);
         setUpMap();
-    }
+        LatLng loca = new LatLng(14.427890, 121.023846);
 
+        googleMap.addMarker(new MarkerOptions()
+                .position(loca)
+                .title("SSS, Alabang ZapoteRoad")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                );
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loca, 16.0f));
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker arg0) {
+                if (arg0.getTitle().equals("SSS, Alabang ZapoteRoad")) {// if marker source is clicked
+                    Intent openRegister_intent = new Intent(getActivity(), Queue_query.class);
+                    startActivity(openRegister_intent);
+
+
+                }
+                return true;
+            }
+        });}
     private void setUpMap() {
 
         mMap.setMyLocationEnabled(true);
@@ -94,9 +135,16 @@ public class Location_fragment extends SupportMapFragment implements OnMapReadyC
                 Location loc = manager.getLastKnownLocation(manager.getBestProvider(new Criteria(), false));
                 Double a = loc.getLatitude();
                 Double b = loc.getLongitude();
-                CameraUpdate myCam = CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 12);
-                mMap.animateCamera(myCam);
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+//                CameraUpdate myCam = CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 12);
+//                mMap.animateCamera(myCam);
+//                mMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+
+
+                LatLng loca = new LatLng(loc.getLatitude(), loc.getLongitude());
+                //icon = mMap.addMarker(new MarkerOptions().position(loca));
+                if(mMap != null){
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loca, 16.0f));
+                }
             }
         }catch (Exception e){}
 

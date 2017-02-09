@@ -78,7 +78,7 @@ public class Splashscreen extends AppCompatActivity {
             new GcmLoader(this, new Callback<String>() {
                 @Override
                 public void onSuccess(String result) {
-                    new Timer().schedule(task, 1000);
+                    new Timer().schedule(task, 5000);
                 }
 
                 @Override
@@ -89,7 +89,7 @@ public class Splashscreen extends AppCompatActivity {
         } else {
             try{
                 // Show splash screen for 1 seconds
-                new Timer().schedule(task, 1000);
+                new Timer().schedule(task, 5000);
             }catch (Exception e){}
         }
 
@@ -124,12 +124,12 @@ public class Splashscreen extends AppCompatActivity {
                 PermissionUtil.goToPermissionSettingScreen(Splashscreen.this);
             }
         });
-        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                new Timer().schedule(task, 1000);
-            }
-        });
+//        builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                new Timer().schedule(task, 1000);
+//            }
+//        });
         builder.show();
     }
 }

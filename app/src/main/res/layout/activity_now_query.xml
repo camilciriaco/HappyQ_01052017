@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:navigationIcon="?attr/homeAsUpIndicator"
-        android:background="@color/coolgreen"/>
+        android:background="@color/lightblue"/>
 
     <TextView
         android:text="001"
@@ -37,18 +37,6 @@
         android:layout_above="@+id/tvDate"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="LTO-ALABANG APPLICATION"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tName"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:layout_above="@+id/tvQueue"
-        android:layout_centerHorizontal="true" />
-
 
     <TextView
         android:text="00"
@@ -61,18 +49,6 @@
         android:layout_alignBaseline="@+id/textView"
         android:layout_alignBottom="@+id/textView"
         android:layout_toEndOf="@+id/textView" />
-
-    <TextView
-        android:text="00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvFree"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:paddingLeft="10dp"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignEnd="@+id/tName" />
 
     <TextView
         android:text="Sample City"
@@ -144,17 +120,6 @@
         android:layout_below="@+id/textView1"
         android:layout_alignStart="@+id/textView1" />
 
-    <TextView
-        android:text="001"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="100sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:id="@+id/tvQueue"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/textView1" />
-
     <Button
         android:text="RESERVE"
         android:layout_width="match_parent"
@@ -170,6 +135,55 @@
         android:layout_marginBottom="37dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFree"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:paddingLeft="10dp"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:text="001"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="100sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:id="@+id/tvnumQueue"
+        android:layout_marginBottom="25dp"
+        android:layout_above="@+id/textView6"
+        android:layout_toEndOf="@+id/tvQNumber" />
+
+    <TextView
+        android:text="LTO-ALABANG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tbranchname"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_below="@+id/tvQNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:text="APPLICATION"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tqueue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:layout_below="@+id/tbranchname"
+        android:layout_alignStart="@+id/tbranchname" />
 
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateFormat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -66,18 +67,30 @@ public class Date_Query extends AppCompatActivity {
             e.toString();
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(Html.fromHtml("<font color='#ffffff'>Reservation by Date</font>"));
+//
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent x = new Intent(Queue_query.this, Activity_main_tablayout.class);
+//                startActivity(x);
+//            }
+//        });
 
-        toolbar.setTitle(Html.fromHtml("<font color='#ffffff'>Reservation</font>"));
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent openReserve_intent1 = new Intent(Date_Query.this, QueueToolbar.class);
-                startActivity(openReserve_intent1);
-            }
-        });
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
 
     }
 
 }
+
+

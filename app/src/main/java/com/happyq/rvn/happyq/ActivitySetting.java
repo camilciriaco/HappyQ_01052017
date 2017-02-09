@@ -15,9 +15,11 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.preference.SwitchPreference;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatCheckedTextView;
@@ -34,6 +36,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.facebook.login.LoginManager;
+import com.happyq.rvn.happyq.sigin.Login;
+import com.happyq.rvn.happyq.sigin.UserSessionManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import com.happyq.rvn.happyq.data.Constant;
@@ -41,10 +46,14 @@ import com.happyq.rvn.happyq.data.SharedPref;
 import com.happyq.rvn.happyq.data.ThisApplication;
 import com.happyq.rvn.happyq.data.Tools;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 /**
  * ATTENTION : To see where list of setting comes is open res/xml/setting_notification.xml
  * */
 public class ActivitySetting extends PreferenceActivity {
+
+
 
     private ImageLoader imgloader = ImageLoader.getInstance();
     private View parent_view;
@@ -52,12 +61,16 @@ public class ActivitySetting extends PreferenceActivity {
     private SharedPref sharedPref;
     SwitchPreference pref;
     Context _context;
-
+    UserSessionManager session;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.setting_notification);
+
+        // return inflater.inflate(R.xml.setting_notification, container, false);
+
         parent_view = findViewById(android.R.id.content);
 
         sharedPref = new SharedPref(getApplicationContext());
@@ -74,6 +87,9 @@ public class ActivitySetting extends PreferenceActivity {
         Preference resetCachePref = findPreference(getString(R.string.pref_key_reset_cache));
         Preference themePref = findPreference(getString(R.string.pref_key_theme));
         Preference ratePref = findPreference(getString(R.string.pref_key_rate));
+        Preference logoutPref = findPreference(getString(R.string.pref_key_logout));
+
+
         //Preference themePref = findPreference(getString(R.string.pref_key_theme));
         //Preference ratePref = findPreference("key_rate");
         //Preference aboutPref = findPreference("key_about");
@@ -171,6 +187,31 @@ public class ActivitySetting extends PreferenceActivity {
             }
         });
 
+        logoutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog.Builder builder =new AlertDialog.Builder(ActivitySetting.this);
+                builder.setTitle(getString(R.string.dialog_confirm_title));
+                builder.setMessage(getString(R.string.message_logout));
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        Intent ia = new Intent(getApplicationContext(), Login.class);
+                        ia.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        LoginManager.getInstance().logOut();
+                        // Add new Flag to start new Activity
+                        ia.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(ia);
+                    }
+                });
+                builder.setNegativeButton("Cancel", null);
+                builder.show();
+                return true;
+            }
+        });
+
+        // for system bar in lollipop
+        Tools.systemBarLolipop(this);
     }
        /* themePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {

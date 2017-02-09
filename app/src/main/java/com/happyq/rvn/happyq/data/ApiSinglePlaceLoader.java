@@ -34,7 +34,7 @@ public class ApiSinglePlaceLoader extends AsyncTask<String, String, Place> {
 
         String URL_SINGLE_PLACES = Constant.getURLApiSinglePlace(place_id);
         try {
-            Log.e("CITY", URL_SINGLE_PLACES);
+            Log.e("HAPPYQ", URL_SINGLE_PLACES);
             Thread.sleep(300);
             JsonReader reader = jsonStream.getJsonResult(URL_SINGLE_PLACES, JSONStream.METHOD_GET, new ArrayList<NameValuePair>());
 

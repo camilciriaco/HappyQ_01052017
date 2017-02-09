@@ -25,6 +25,10 @@ public class DataQueue  {
     //img
     public String banners;
 
+    //queue_number
+    public String cur;
+    public String rec;
+    public String ctr;
 
 
     public String getQueuename() {

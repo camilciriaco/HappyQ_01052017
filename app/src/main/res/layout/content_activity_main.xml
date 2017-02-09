@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activitymain"
     tools:showIn="@layout/app_bar_activity_main"
     android:background="@color/grey_soft">
 
     <FrameLayout
-        android:id="@+id/content_frame"
+        android:id="@+id/content_frameb"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:visibility="gone"></FrameLayout>
 
     <FrameLayout
         android:id="@+id/containerView"

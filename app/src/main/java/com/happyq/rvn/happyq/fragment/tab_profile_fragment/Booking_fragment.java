@@ -77,29 +77,35 @@ public class Booking_fragment extends android.support.v4.app.Fragment  implement
     }
 
 
+
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
 
-        final MenuItem item = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);
 
-        MenuItemCompat.setOnActionExpandListener(item,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        // Do something when collapsed
-                        adapter.setFilter(mCountryModel);
-                        return true; // Return true to collapse action view
-                    }
 
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        // Do something when expanded
-                        return true; // Return true to expand action view
-                    }
-                });
+//        inflater.inflate(R.menu.menu_search, menu);
+//
+//        final MenuItem item = menu.findItem(R.id.action_search);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//        searchView.setOnQueryTextListener(this);
+//
+//        MenuItemCompat.setOnActionExpandListener(item,
+//                new MenuItemCompat.OnActionExpandListener() {
+//                    @Override
+//                    public boolean onMenuItemActionCollapse(MenuItem item) {
+//                        // Do something when collapsed
+//                        adapter.setFilter(mCountryModel);
+//                        return true; // Return true to collapse action view
+//                    }
+//
+//                    @Override
+//                    public boolean onMenuItemActionExpand(MenuItem item) {
+//                        // Do something when expanded
+//                        return true; // Return true to expand action view
+//                    }
+//                });
     }
 
 

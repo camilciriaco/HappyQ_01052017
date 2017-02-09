@@ -87,14 +87,14 @@ public class Activitymain extends AppCompatActivity
         fbimg = (ProfilePictureView) findViewById(R.id.fbimg);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         fl = (FrameLayout) findViewById(R.id.containerView);
-        content_fl = (FrameLayout) findViewById(R.id.content_frame);
+        content_fl = (FrameLayout) findViewById(R.id.content_frameb);
 
         setSupportActionBar(toolbar);
         prepareImageLoader();
 
-        FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
-            setSupportActionBar(toolbar);
+//        android.support.v4.app.FragmentManager fm = getFragmentManager();
+//        fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+//            setSupportActionBar(toolbar);
 
 
 // private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -311,26 +311,27 @@ public class Activitymain extends AppCompatActivity
             Intent i = new Intent(getApplicationContext(), ActivitySetting.class);
             startActivity(i);
 
-        } else if (id == R.id.action_logout){
-            AlertDialog.Builder builder =new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.dialog_confirm_title));
-            builder.setMessage(getString(R.string.message_logout));
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // Login a = new Login();
-                    //a.signOut();
-
-                    session.logoutUser();
-                    //session.disconnectFromFacebook();
-                    Intent ia = new Intent(getApplicationContext(), Login.class);
-                    startActivity(ia);
-                }
-            });
-            builder.setNegativeButton("Cancel", null);
-            builder.show();
-
         }
+//        else if (id == R.id.action_logout){
+//            AlertDialog.Builder builder =new AlertDialog.Builder(this);
+//            builder.setTitle(getString(R.string.dialog_confirm_title));
+//            builder.setMessage(getString(R.string.message_logout));
+//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    // Login a = new Login();
+//                    //a.signOut();
+//
+//                    session.logoutUser();
+//                    //session.disconnectFromFacebook();
+//                    Intent ia = new Intent(getApplicationContext(), Login.class);
+//                    startActivity(ia);
+//                }
+//            });
+//            builder.setNegativeButton("Cancel", null);
+//            builder.show();
+//
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -355,18 +356,18 @@ public class Activitymain extends AppCompatActivity
                             }
                             else if (id == R.id.nav_all)
                                 {
-                                    fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
-                                    fragmentvisilibility();
+//                                    fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+//                                    fragmentvisilibility();
                                 }
                              else if (id == R.id.nav_purchasecredit)
                                 {
-                                    fm.beginTransaction().replace(R.id.content_frame, new PurchaseCredit_fragment()).commit();
-                                    fragmentvisilibility();
+//                                    fm.beginTransaction().replace(R.id.content_frame, new PurchaseCredit_fragment()).commit();
+//                                    fragmentvisilibility();
                                 }
                              else if (id == R.id.nav_queueprices)
                                 {
-                                    fm.beginTransaction().replace(R.id.content_frame, new QueuePrices_fragment()).commit();
-                                    fragmentvisilibility();
+//                                    fm.beginTransaction().replace(R.id.content_frame, new QueuePrices_fragment()).commit();
+//                                    fragmentvisilibility();
                                 }
                                 else if (id == R.id.nav_logout) {
                                         AlertDialog.Builder builder =new AlertDialog.Builder(Activitymain.this);

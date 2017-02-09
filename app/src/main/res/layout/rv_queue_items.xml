@@ -1,125 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
-    android:focusable="true"
-    android:layout_width="match_parent"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/relativelayoutq"
-    android:layout_margin="2dp"
-
-    >
+    android:id="@+id/relativelayoutq">
 
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/lyt_parent"
         style="@style/RippleStyleWhite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        >
-<android.support.v7.widget.CardView
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardview1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardElevation="0dp"
-    card_view:cardMaxElevation="7dp"
-    card_view:cardBackgroundColor="#8058CFE0">
-
-
-
-    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-
-        <TableRow>
-            <TextView
-                android:id="@+id/tvqueuename"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Name"
-                android:textColor="@color/text"
-                android:textSize="22sp"/>
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/txtvqueuactivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Activity"
-                android:textColor="@color/text"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/queuactivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Activity"
-                android:textColor="@color/text"
-                android:textSize="14sp"/>
+        android:layout_marginLeft="@dimen/spacing_small"
+        android:layout_marginRight="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_small">
 
 
-        </TableRow>
-        <TableRow>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_place_tag_height"
+                android:background="#448AFF"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true">
 
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical"
+                    android:id="@+id/linearLayout2">
+                    <TextView
+                        android:id="@+id/tvqueuename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/txtvqueuestatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Status"
-                android:textColor="@color/text"
-                android:textSize="14sp"/>
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/queuestatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Status"
-                android:textColor="@color/text"
-                android:textSize="14sp"/>
-        </TableRow>
+                <TextView
+                    android:id="@+id/txtvqueuactivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Activity"
+                    android:gravity="right"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_above="@+id/linearLayout2"
+                    android:layout_toStartOf="@+id/queuactivity"
+                    android:layout_marginEnd="15dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/queuactivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Activity"
+                    android:gravity="right"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
 
-            <TextView
-                android:id="@+id/txtqueuamaxreserve"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="No. of Reservation     "
-                android:textColor="@color/text"
-                android:textSize="14sp"/>
 
-            <TextView
-                android:id="@+id/queuamaxreserve"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Max Reservation"
-                android:textColor="@color/text"
-                android:textSize="14sp"/>
-        </TableRow>
+                <TextView
+                    android:id="@+id/queuestatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Status"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_below="@+id/txtvqueuactivity"
+                    android:layout_toEndOf="@+id/txtvqueuactivity" />
 
-    </TableLayout>
+                <TextView
+                    android:id="@+id/txtvqueuestatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Status"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_below="@+id/txtvqueuactivity"
+                    android:layout_alignEnd="@+id/txtvqueuactivity" />
 
-</android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/queuamaxreserve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Max Res"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@+id/queuestatus" />
+
+                <TextView
+                    android:id="@+id/txtqueuamaxreserve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="No. of Reservation"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:layout_below="@+id/txtvqueuestatus"
+                    android:layout_toStartOf="@+id/queuamaxreserve"
+                    android:layout_alignEnd="@+id/txtvqueuestatus" />
+            </RelativeLayout>
+
+
     </com.balysv.materialripple.MaterialRippleLayout>
+
 </RelativeLayout>

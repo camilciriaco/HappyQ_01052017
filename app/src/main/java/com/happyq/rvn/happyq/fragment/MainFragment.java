@@ -1,30 +1,25 @@
 package com.happyq.rvn.happyq.fragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+import android.os.Parcelable;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
 import com.happyq.rvn.happyq.R;
-import com.happyq.rvn.happyq.data.adapter.MainQAdapter;
-import com.happyq.rvn.happyq.fragment.listing.AdapterRVQueue;
 import com.happyq.rvn.happyq.fragment.listing.AdapterRegQueue;
 import com.happyq.rvn.happyq.fragment.listing.DataQueue;
 import com.happyq.rvn.happyq.fragment.listing.RecyclerItemClickListener;
-import com.happyq.rvn.happyq.model.MainQList;
+import com.happyq.rvn.happyq.reservation_query.QueueToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,14 +39,19 @@ import java.util.List;
  * Created by RVN on 1/3/2017.
  */
 
-public class MainFragment extends Fragment {
+public class MainFragment extends android.support.v4.app.Fragment {
     View lyt_not_found;
+    FrameLayout content_fl, fl;
+    ViewPager vieww;
     List<DataQueue> data = new ArrayList<>();
     SwipeRefreshLayout mSwipeRefreshLayout;
     RecyclerView recyclerView;
     AdapterRegQueue mAdapter;
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
+    private Parcelable recyclerViewState;
+    private final Handler handler = new Handler();
+    Runnable refresh;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,9 +63,16 @@ public class MainFragment extends Fragment {
         View v = LayoutInflater.from(container.getContext()).inflate(R.layout.fragment_main, container, false);
         mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layouta);
         lyt_not_found = v.findViewById(R.id.lyt_not_founda);
+        vieww = (ViewPager) v.findViewById(R.id.viewpager);
+        fl = (FrameLayout) v.findViewById(R.id.containerView);
+        content_fl = (FrameLayout) v.findViewById(R.id.content_frameb);
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_viewa);
+
+        // Save state
+        //recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.marker_secondary, R.color.marker_primary, R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -74,7 +81,7 @@ public class MainFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //mAdapter.notifyDataSetChanged();
+
                         //onRefresh();
                         new AsyncFetch().execute();
                         mSwipeRefreshLayout.setRefreshing(false);
@@ -85,18 +92,22 @@ public class MainFragment extends Fragment {
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                FragmentManager fm = getFragmentManager();
-                fm.beginTransaction().replace(R.id.content_frame, new All_fragment()).commit();
+            public String onItemClick(View view, int position) {
+               String branchname = "RVN Technology Solutions INC.";
+                Intent i = new Intent(getActivity(), Queue_query.class);
+                i.putExtra("branchname", branchname);
+                startActivity(i);
+                return null;
             }
         }));
 
         new MainFragment.AsyncFetch().execute();
+        doTheAutoRefresh();
         return v;
     }
 
     public class AsyncFetch extends AsyncTask<String, String, String> {
-        ProgressDialog pdLoading = new ProgressDialog(getActivity());
+        //ProgressDialog pdLoading = new ProgressDialog(getActivity());
         HttpURLConnection conn;
         URL url = null;
 
@@ -105,14 +116,17 @@ public class MainFragment extends Fragment {
             super.onPreExecute();
 
             //this method will be running on UI thread
-            pdLoading.setMessage("\tLoading queues...");
-            pdLoading.setCancelable(false);
-            pdLoading.show();
+
+//            pdLoading.setMessage("\tLoading queues...");
+//            pdLoading.setCancelable(false);
+//            pdLoading.show();
+
         }
 
         @Override
         protected String doInBackground(String... params) {
             try {
+
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
                 url = new URL("https://happyq.txtlinkapp.com/happyq_app/QA_query.php");
@@ -168,9 +182,11 @@ public class MainFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             //this method will be running on UI thread
-            pdLoading.dismiss();
+
+           // pdLoading.dismiss();
             visiblea();
-            pdLoading.dismiss();
+            //pdLoading.dismiss();
+            data.clear();
 
             try {
 
@@ -197,7 +213,7 @@ public class MainFragment extends Fragment {
                                 notvisiblea();
                                 JSONObject json_dataa = jsonArrayops.getJSONObject(x);
 
-                                //QueueData.queuename= json_data.getString("name");
+                                QueueDataa.queuename= "RVN Technology Solutions INC.";
                                 QueueDataa.rqueuestime = json_dataa.getString("t_start");
                                 QueueDataa.rqueueetime = json_dataa.getString("t_end");
                                 QueueDataa.rqueueoperationday = json_dataa.getString("days");
@@ -214,12 +230,16 @@ public class MainFragment extends Fragment {
                                     //QueueData.queuename= json_data.getString("name");
                                     QueueDataa.Atitle = json_data.getString("header");
                                     QueueDataa.Announcement = json_data.getString("message");
+
                                     data.add(QueueDataa);
                                     mAdapter = new AdapterRegQueue(data);
                                     recyclerView.setAdapter(mAdapter);
                                 }
                             }
+
                         }
+
+
                     } catch (JSONException e) {
                         // Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                     }
@@ -236,14 +256,26 @@ public class MainFragment extends Fragment {
                     //QueueData.fishImage= json_data.getString("fish_img");
                     //QueueData.price= json_data.getInt("price");
 
-
-
-
             } catch (JSONException e) {
                 // Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
             }
         }
     }
+
+
+    private void doTheAutoRefresh() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //ProgressDialog pdLoading = new ProgressDialog(context);
+                // Write code for your refresh logic
+                //pdLoading.dismiss();
+                new MainFragment.AsyncFetch().execute();
+                doTheAutoRefresh();
+            }
+        }, 30000);
+    }
+
 
     public void visiblea(){
         recyclerView.setVisibility(View.GONE);

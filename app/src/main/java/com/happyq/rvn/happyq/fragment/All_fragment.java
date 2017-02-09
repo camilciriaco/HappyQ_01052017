@@ -1,6 +1,5 @@
 package com.happyq.rvn.happyq.fragment;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -36,7 +35,7 @@ import com.happyq.rvn.happyq.reservation_query.QueueToolbar;
 /**
  * Created by RVN on 1/3/2017.
  */
-public class All_fragment extends Fragment {
+public class All_fragment extends android.support.v4.app.Fragment {
     //MyReceiver r;
     View lyt_not_found;
     List<DataQueue> data=new ArrayList<>();
@@ -73,6 +72,7 @@ public class All_fragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        mAdapter.clear();
                         new All_fragment.AsyncFetch().execute();
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
@@ -82,9 +82,12 @@ public class All_fragment extends Fragment {
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public String onItemClick(View view, int position) {
+
+
                 Intent i = new Intent(getActivity(), QueueToolbar.class);
                 startActivity(i);
+                return null;
             }
         }));
 
@@ -174,7 +177,7 @@ public class All_fragment extends Fragment {
             pdLoading.dismiss();
             visiblea();
             pdLoading.dismiss();
-
+            data.clear();
             try {
 
                 JSONArray jArray = new JSONArray(result);
@@ -191,9 +194,11 @@ public class All_fragment extends Fragment {
 
                     //QueueData.fishImage= json_data.getString("fish_img");
                     //QueueData.price= json_data.getInt("price");
+
                     data.add(QueueData);
                     mAdapter = new AdapterRVQueue(data);
                     recyclerView.setAdapter(mAdapter);
+
                 }
 
             } catch (JSONException e) {

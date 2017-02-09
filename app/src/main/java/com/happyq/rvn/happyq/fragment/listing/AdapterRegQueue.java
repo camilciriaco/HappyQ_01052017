@@ -34,7 +34,7 @@ public class AdapterRegQueue extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             public VHolder(View v) {
                 super(v);
-                tvrquename = (TextView) v.findViewById(R.id.tvqueuename);
+                tvrquename = (TextView) v.findViewById(R.id.tv_title);
                 tvrqueuestime = (TextView) v.findViewById(R.id.tv_qstime);
                 tvrqueueetime = (TextView) v.findViewById(R.id.tv_qetime);
                 tvrqueueoperationday = (TextView) v.findViewById(R.id.tv_qoperationday);
@@ -65,7 +65,7 @@ public class AdapterRegQueue extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         AdapterRegQueue.VHolder myHolder= (AdapterRegQueue.VHolder) holder;
         DataQueue current=mDataset.get(position);
-        //myHolder.tvrquename.setText(current.queuename);
+        myHolder.tvrquename.setText(current.queuename);
         myHolder.tvrqueuestime.setText(current.rqueuestime);
         myHolder.tvrqueueetime.setText(current.rqueueetime);
         myHolder.tvrqueueoperationday.setText(current.rqueueoperationday);

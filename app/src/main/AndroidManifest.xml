@@ -102,6 +102,9 @@
         <activity
             android:name=".ActivitySetting"
             android:label="@string/activity_title_settings" />
+        <activity
+            android:name=".Activity_main_tablayout"
+            android:label="@string/activity_title_settings" />
 
         <!-- [START Facebook] -->
         <activity
@@ -141,22 +144,13 @@
             android:value="@string/api_key" />
 
         <activity
-            android:name=".detail.ItemListActivity"
-            android:label="@string/title_item_list"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name=".detail.ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".detail.ItemListActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.happyq.rvn.happyq.detail.ItemListActivity" />
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:name=".fragment.Activity_credit_purchasing"
+            android:label="Purchasing Credits"
+             />
 
+        <activity
+            android:name=".fragment.Queue_query"
+            android:label="Queueing"></activity>
 
 
 

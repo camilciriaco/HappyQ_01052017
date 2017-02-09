@@ -1,18 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="97dp"
+        android:layout_height="122dp"
+        app:srcCompat="@drawable/img_coin"
+        android:id="@+id/imageView2"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
 
 
     <TextView
+        android:text="You have 0 Credit/s left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/darker_gray"
+        android:id="@+id/tvMyCredit"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        style="@android:style/Widget.DeviceDefault.Light.TextView"
+        android:fontFamily="serif"
+        tools:layout_editor_absoluteY="166dp"
+        tools:layout_editor_absoluteX="90dp"
         android:gravity="center"
-        android:visibility="visible"
-        android:text="credits"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="and"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/andTV"
+        android:textColor="@color/text"
+        android:textSize="16sp"
+        tools:ignore="MissingConstraints"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:layout_below="@+id/tvMyCredit"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="You have 0 Free Credit/s left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFreeCredit"
+        android:textColor="@color/text"
+        android:textSize="18sp"
+        tools:ignore="MissingConstraints"
+        android:fontFamily="serif"
+        android:gravity="center"
+        android:layout_below="@+id/andTV"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

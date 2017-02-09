@@ -52,4 +52,12 @@
             android:title="Send Feedback"
             android:key="@string/pref_key_feedback"/>
 </PreferenceCategory>
+
+    <PreferenceCategory android:title="Logout">
+        <Preference
+            android:title="Logout"
+            android:key="@string/pref_key_logout"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

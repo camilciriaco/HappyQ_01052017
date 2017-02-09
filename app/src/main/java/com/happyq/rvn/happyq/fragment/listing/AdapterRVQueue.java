@@ -3,18 +3,14 @@ package com.happyq.rvn.happyq.fragment.listing;
 /**
  * Created by RVN on 1/18/2017.
  */
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.happyq.rvn.happyq.R;
-import com.happyq.rvn.happyq.detail.ItemDetailActivity;
-import com.happyq.rvn.happyq.detail.ItemDetailFragment;
 
 import java.util.List;
 
@@ -36,7 +32,11 @@ public class AdapterRVQueue extends RecyclerView.Adapter<RecyclerView.ViewHolder
             tvqueueactivity = (TextView) v.findViewById(R.id.queuactivity);
             tvqueuestatus = (TextView) v.findViewById(R.id.queuestatus);
             tvqueuemaxreserve = (TextView) v.findViewById(R.id.queuamaxreserve);
+
         }
+
+
+
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -68,6 +68,18 @@ public class AdapterRVQueue extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+
+    public void clear() {
+        int size = this.mDataset.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                this.mDataset.remove(0);
+            }
+
+            this.notifyItemRangeRemoved(0, size);
+        }
     }
 
     }

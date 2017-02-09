@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activitymain">
+    tools:context=".Activity_main_tablayout">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -15,11 +15,10 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:layout_alignParentTop="true"
             android:background="#00aced"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:theme="@style/AppTheme"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     </android.support.design.widget.AppBarLayout>
@@ -33,6 +32,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:background="@color/grey_dark"
-        android:src="@android:drawable/ic_search_category_default" />
+        android:src="@android:drawable/ic_search_category_default"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>

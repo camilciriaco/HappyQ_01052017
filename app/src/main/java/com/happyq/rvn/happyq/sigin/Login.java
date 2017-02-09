@@ -64,7 +64,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.happyq.rvn.happyq.Activitymain;
+import com.happyq.rvn.happyq.Activity_main_tablayout;
 import com.happyq.rvn.happyq.R;
 
 import com.happyq.rvn.happyq.data.DatabaseHandler;
@@ -394,7 +394,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
                             // Launch main activity
                             Toast.makeText(Login.this, "Congrats: Login Successfull", Toast.LENGTH_LONG).show();
-                            Intent loginuser = new Intent(Login.this, Activitymain.class);
+                            Intent loginuser = new Intent(Login.this, Activity_main_tablayout.class);
                             loginuser.putExtra("username", email);
                             loginuser.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             loginuser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -458,7 +458,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
-                        //updateUI(false);
+                        updateUI(false);
                     }
                 });
     }
@@ -491,7 +491,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             Log.e(TAG, "display email: " + acct.getId());
 
             if(acct != null) {
-                Intent getacct = new Intent(Login.this, Activitymain.class);
+                Intent getacct = new Intent(Login.this, Activity_main_tablayout.class);
                 getacct.putExtra("gFname", acct.getDisplayName());
                 getacct.putExtra("gLname", acct.getEmail());
                 getacct.putExtra("gimgurl", acct.getPhotoUrl().toString());
@@ -725,7 +725,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
             checkffblogin(fbname,fblastname, facebook_id);
 
-            Intent main = new Intent(Login.this, Activitymain.class);
+            Intent main = new Intent(Login.this, Activity_main_tablayout.class);
             main.putExtra("fbname", profile.getFirstName());
             main.putExtra("fbsurname", profile.getLastName());
             main.putExtra("middlename", profile.getMiddleName());
@@ -821,7 +821,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
     private void setProfileToView(JSONObject jsonObject) {
         try {
             if (jsonObject!= null){
-                Intent fb = new Intent(Login.this, Activitymain.class);
+                Intent fb = new Intent(Login.this, Activity_main_tablayout.class);
                 fb.putExtra("fbemail", jsonObject.getString("email"));
                 fb.putExtra("fbname", jsonObject.getString("name"));
                 startActivity(fb);}

@@ -35,7 +35,7 @@ public class ApiClientLoader extends AsyncTask<String, String, ApiClient> {
     @Override
     protected ApiClient doInBackground(String... params) {
         try {
-            Log.e("CITY", URL);
+            Log.e("HAPPYQ", URL);
             Thread.sleep(100);
 
             JsonReader reader     = jsonStream.getJsonResult(URL, JSONStream.METHOD_GET, new ArrayList<NameValuePair>());

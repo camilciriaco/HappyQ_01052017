@@ -1,28 +1,26 @@
-package com.happyq.rvn.happyq.fragment.tab_profile_fragment;
+package com.happyq.rvn.happyq.fragment;
 
 import android.app.ProgressDialog;
-import android.content.res.Resources;
-import android.graphics.Rect;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import com.happyq.rvn.happyq.R;
-import com.happyq.rvn.happyq.fragment.listing.AdapterFavorites;
 import com.happyq.rvn.happyq.fragment.listing.AdapterRVQueue;
 import com.happyq.rvn.happyq.fragment.listing.DataQueue;
 import com.happyq.rvn.happyq.fragment.listing.RecyclerItemClickListener;
+import com.happyq.rvn.happyq.reservation_query.QueueToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,43 +36,39 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.data;
-import static com.happyq.rvn.happyq.fragment.All_fragment.CONNECTION_TIMEOUT;
-import static com.happyq.rvn.happyq.reservation_query.QueueToolbar.READ_TIMEOUT;
+/**
+ * Created by RVN on 2/7/2017.
+ */
 
-public class Favorites_fragment extends android.support.v4.app.Fragment {
-
+public class Queue_query extends AppCompatActivity {
+    View lyt_not_found;
+    Context context=this;
+    List<DataQueue> data=new ArrayList<>();
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    RecyclerView recyclerView;
+    AdapterRVQueue mAdapter;
+    String queuename;
+    Intent r;
+    HttpURLConnection connec;
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
-    View lyt_not_found;
-    RecyclerView recyclerView2;
-    SwipeRefreshLayout mSwipeRefreshLayout;
-    AdapterFavorites mAdapter;
-    List<DataQueue> data=new ArrayList<>();
+    private final Handler handler = new Handler();
 
-    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_queue_query);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View v = LayoutInflater.from(container.getContext()).inflate(R.layout.tab_favorites, container, false);
 
-        // Setup and Handover data to recyclerview
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.activity_main_swipe_refresh_layout);
-        lyt_not_found = v.findViewById(R.id.lyt_not_found);
-        recyclerView2 = (RecyclerView) v.findViewById(R.id.recyclerview);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_main_swipe_refresh_layout);
+        lyt_not_found = findViewById(R.id.lyt_not_found);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView2.setLayoutManager(mLayoutManager);
-        recyclerView2.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView2.setItemAnimator(new DefaultItemAnimator());
+        doTheAutoRefresh();
+        new Queue_query.AsyncFetch().execute();
 
-        //Make call to AsyncTask
-        new Favorites_fragment.AsyncFetch().execute();
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.marker_secondary, R.color.marker_primary, R.color.colorPrimary);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -84,31 +78,60 @@ public class Favorites_fragment extends android.support.v4.app.Fragment {
                     @Override
                     public void run() {
                         mAdapter.clear();
-                        new Favorites_fragment.AsyncFetch().execute();
+                        new AsyncFetch().execute();
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 }, 2500);
             }
         });
 
-        recyclerView2.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public String onItemClick(View view, int position) {
 
 
-//                Intent i = new Intent(getActivity(), QueueToolbar.class);
-//                startActivity(i);
 
-                return null;
-            }
-        }));
-        return v;
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public String onItemClick(View v, int position) {
+
+                        String BN = getIntent().getExtras().getString("branchname");
+                        String showqueue = "https://happyq.txtlinkapp.com/happyq_app/qdetails.php?name=" + data.get(position).queuename;
+                        Toast.makeText(context, showqueue, Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(Queue_query.this, QueueToolbar.class);
+                        intent.putExtra("queuename", data.get(position).queuename);
+                        intent.putExtra("BN_queue", BN);
+                        startActivity(intent);
+                        return showqueue;
+                    }
+                })
+        );
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle(Html.fromHtml("<font color='#ffffff'>Queueing</font>"));
+//
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent x = new Intent(Queue_query.this, Activity_main_tablayout.class);
+//                startActivity(x);
+//            }
+//        });
+
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+
     }
 
-
-
     public class AsyncFetch extends AsyncTask<String, String, String> {
-        ProgressDialog pdLoading = new ProgressDialog(getActivity());
+        //ProgressDialog pdLoading = new ProgressDialog(context);
         HttpURLConnection conn;
         URL url = null;
 
@@ -117,17 +140,15 @@ public class Favorites_fragment extends android.support.v4.app.Fragment {
             super.onPreExecute();
 
             //this method will be running on UI thread
-            pdLoading.setMessage("\tLoading queues...");
-            pdLoading.setCancelable(false);
-            pdLoading.show();
+//            pdLoading.setMessage("\tLoading queues...");
+//            pdLoading.setCancelable(false);
+//            pdLoading.show();
         }
-
-
 
         @Override
         protected String doInBackground(String... params) {
             try {
-
+                String branchname_mainfragment = getIntent().getExtras().getString("branchname");
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
                 url = new URL("https://happyq.txtlinkapp.com/happyq_app/queue_query.php");
@@ -183,15 +204,17 @@ public class Favorites_fragment extends android.support.v4.app.Fragment {
             } finally {
                 conn.disconnect();
             }
+
+
         }
 
         @Override
         protected void onPostExecute(String result) {
 
             //this method will be running on UI thread
-            pdLoading.dismiss();
+            //pdLoading.dismiss();
             visiblea();
-            pdLoading.dismiss();
+            //pdLoading.dismiss();
             data.clear();
             try {
 
@@ -204,16 +227,19 @@ public class Favorites_fragment extends android.support.v4.app.Fragment {
                     DataQueue QueueData = new DataQueue();
                     QueueData.queuename= json_data.getString("name");
                     QueueData.queueactivity = json_data.getString("activity");
+                    QueueData.queuestatus = json_data.getString("status");
+                    QueueData.queuemaxreserve = json_data.getString("reserve");
 
-
+                    queuename = QueueData.queuename= json_data.getString("name");
                     //QueueData.fishImage= json_data.getString("fish_img");
                     //QueueData.price= json_data.getInt("price");
-
+                    String sendd = queuename;
                     data.add(QueueData);
-                    mAdapter = new AdapterFavorites(data);
-                    recyclerView2.setAdapter(mAdapter);
+                    mAdapter = new AdapterRVQueue(data);
+                    recyclerView.setAdapter(mAdapter);
 
                 }
+
 
             } catch (JSONException e) {
                 // Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
@@ -222,66 +248,26 @@ public class Favorites_fragment extends android.support.v4.app.Fragment {
     }
 
     public void visiblea(){
-        recyclerView2.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
         lyt_not_found.setVisibility(View.VISIBLE);
     }
 
     public void notvisiblea(){
         lyt_not_found.setVisibility(View.GONE);
-        recyclerView2.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
-
-
-    /**
-     * Adding few albums for testing
-     */
-
-    /**
-     * RecyclerView item decoration - give equal margin around grid item
-     */
-    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
+    private void doTheAutoRefresh() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //ProgressDialog pdLoading = new ProgressDialog(context);
+                // Write code for your refresh logic
+                //pdLoading.dismiss();
+                new Queue_query.AsyncFetch().execute();
+                doTheAutoRefresh();
             }
-        }
+        }, 20000);
     }
-
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
-
 
 }

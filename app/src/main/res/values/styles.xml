@@ -29,6 +29,9 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:textStyle">normal</item>
     </style>
-
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#FFEB3B</item>
+        <item name="colorControlActivated">#FFA000</item>
+    </style>
 
 </resources>

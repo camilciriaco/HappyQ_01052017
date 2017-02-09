@@ -17,7 +17,7 @@ import com.happyq.rvn.happyq.R;
 /**
  * Created by RVN on 1/3/2017.
  */
-public class QueuePrices_fragment extends Fragment{
+public class QueuePrices_fragment extends android.support.v4.app.Fragment{
 RelativeLayout relativeLayouta;
     Button addcredit;
     @Override

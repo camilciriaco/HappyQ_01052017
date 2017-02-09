@@ -13,7 +13,9 @@
         android:layout_height="match_parent"
         android:id="@+id/drawer_layout"
         android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        tools:openDrawer="start"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
     <include
         layout="@layout/app_bar_activity_main"

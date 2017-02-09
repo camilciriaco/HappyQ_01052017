@@ -126,8 +126,11 @@ public class UserSessionManager {
         // Add new Flag to start new Activity
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+
+        //disconnectFromFacebook();
         // Staring Login Activity
         _context.startActivity(i);
+
 
     }
 
